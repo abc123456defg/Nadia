@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "cn.harper.injection.mixins",
+  "refmap": "mixins.nadia.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinMinecraft",
+    "MixinEntityPlayerSP",
+    "MixinNetworkManager"
+  ]
+}
