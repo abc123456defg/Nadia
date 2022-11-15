@@ -58,6 +58,14 @@ public class Module {
         EventManager.unregister(this);
     }
 
+    public int getKeyCode() {
+        return keyCode;
+    }
+
+    public void setKeyCode(int keyCode) {
+        this.keyCode = keyCode;
+    }
+
     public boolean isEnabled() {
         return isEnabled;
     }

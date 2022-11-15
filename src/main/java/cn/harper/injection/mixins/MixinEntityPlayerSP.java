@@ -135,11 +135,7 @@ public class MixinEntityPlayerSP extends AbstractClientPlayer implements IEntity
         }
 
     }
-    public void moveEntity(double x, double y, double z) {
-        EventMove event = new EventMove(x, y, z);
-        EventManager.call(event);
-       // this.onMoveEntity(event.getX(), event.getY(), event.getZ()); 暂时不实现
-    }
+
     @Override
     public void setMoveSpeed(EventMove event, double speed) {
         double forward = this.movementInput.moveForward;

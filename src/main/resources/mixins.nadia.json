@@ -6,6 +6,9 @@
   "mixins": [
     "MixinMinecraft",
     "MixinEntityPlayerSP",
+    "MixinGuiSpectator",
+    "MixinEntityRenderer",
+    "MixinGuiIngame",
     "MixinNetworkManager"
   ]
 }
