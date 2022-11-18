@@ -1,16 +1,27 @@
 package cn.harper.module;
 
+import cn.harper.core.font.FontManager;
+import cn.harper.utils.render.RenderUtil;
 import com.darkmagician6.eventapi.EventManager;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 
 public class Module {
-    private String name, description, tag = "";
+    private String name, description,displayName, tag = "";
     private int keyCode;
     private Category category;
     public boolean isEnabled;
     public boolean cantToggle = false;
+    private boolean isHide  = false;
+
+    public float posX;
+    public float posY;
+    public float lastY;
+    public float posYRend;
+    public float displaywidth;
+    public float namewidth;
     public static Minecraft mc = Minecraft.getMinecraft();
+
 
     public Module(String name, String description, Category category) {
         this.name = name;
@@ -50,6 +61,18 @@ public class Module {
         this.category = category;
     }
 
+    public boolean isHide() {
+        return isHide;
+    }
+
+    public void setCantToggle(boolean cantToggle) {
+        this.cantToggle = cantToggle;
+    }
+
+    public void setHide(boolean hide) {
+        isHide = hide;
+    }
+
     public void onEnable() {
         EventManager.register(this);
     }
@@ -64,6 +87,32 @@ public class Module {
 
     public void setKeyCode(int keyCode) {
         this.keyCode = keyCode;
+    }
+
+
+    public void setDisplayName(String displayName) {
+
+        if (this.displayName == null) {
+            this.displayName = displayName;
+            displaywidth = FontManager.normal.getStringWidth(displayName);
+            namewidth = FontManager.normal.getStringWidth(name);
+
+            posX = -15;
+
+        }
+
+        if (!this.displayName.equals(displayName)) {
+            this.displayName = displayName;
+            displaywidth = FontManager.normal.getStringWidth(displayName);
+            namewidth = FontManager.normal.getStringWidth(name);
+
+            posX = -15;
+
+        }
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 
     public boolean isEnabled() {
@@ -104,5 +153,25 @@ public class Module {
 
         }
 
+    }
+    public void onRenderArray() {
+
+        if (namewidth == 0)
+            namewidth = FontManager.normal.getStringWidth(name);
+
+        if (lastY - posY > 0)
+            posYRend = 14;
+        if (lastY - posY < 0)
+            posYRend = -14;
+        if (posYRend != 0)
+            posYRend = (float) RenderUtil.getAnimationStateSmooth(0, posYRend, 16.0f / Minecraft.getDebugFPS());
+
+        float modwidth = (displayName != null) ? FontManager.normal.getStringWidth(displayName) + 3 + FontManager.normal.getStringWidth(name) : namewidth;
+
+        if (isEnabled()) {
+            posX = (float) RenderUtil.getAnimationStateSmooth(modwidth, posX, 16.0f / Minecraft.getDebugFPS());
+        } else {
+            posX = (float) RenderUtil.getAnimationStateSmooth(-15, posX, 16.0f / Minecraft.getDebugFPS());
+        }
     }
 }

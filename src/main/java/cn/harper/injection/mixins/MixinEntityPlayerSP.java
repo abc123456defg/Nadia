@@ -55,6 +55,7 @@ public class MixinEntityPlayerSP extends AbstractClientPlayer implements IEntity
     /**
      * @author Harper
      * @Version 1.0
+     * @reason del warning
      */
     @Inject(method = "onUpdate", at = @At("HEAD"))
     public void eventUpdate(CallbackInfo info) {
@@ -63,7 +64,11 @@ public class MixinEntityPlayerSP extends AbstractClientPlayer implements IEntity
             EventManager.call(event);
         }
     }
-
+    /**
+     * @author Harper
+     * @Version 1.0
+     * @reason del warning
+     */
     @Overwrite
     public void onUpdateWalkingPlayer() {
         boolean flag = this.isSprinting();
@@ -164,7 +169,7 @@ public class MixinEntityPlayerSP extends AbstractClientPlayer implements IEntity
                     - strafe * speed * Math.cos(Math.toRadians(yaw + 90.0f)));
         }
     }
-
+    @Override
     public float getDirection() {
         float yaw = this.rotationYaw;
         final float forward = this.moveForward;

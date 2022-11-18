@@ -1,4 +1,4 @@
-package cn.harper.config;
+package cn.harper.core.config;
 
 public class ConfigManager {
 }

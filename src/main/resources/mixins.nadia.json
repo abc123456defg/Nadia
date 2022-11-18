@@ -8,6 +8,7 @@
     "MixinEntityPlayerSP",
     "MixinGuiSpectator",
     "MixinEntityRenderer",
+    "MixinKeyBinding",
     "MixinGuiIngame",
     "MixinNetworkManager"
   ]
