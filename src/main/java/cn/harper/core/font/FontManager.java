@@ -1,6 +1,7 @@
 package cn.harper.core.font;
 
 import cn.harper.core.font.utils.FontUtils;
+import cn.harper.utils.Info;
 
 
 import java.awt.*;
@@ -18,8 +19,9 @@ public class FontManager {
             InputStream is = FontManager.class.getResourceAsStream("/assets/minecraft/nadia/font/" + name);
             font = Font.createFont(0, is);
             font = font.deriveFont(Font.PLAIN, size);
+
         } catch (Exception ex) {
-            System.out.println("Error loading font " + name);
+            Info.getLogger().info("[FontManager]: Error loading font " + name);
             font = new Font("Arial", Font.PLAIN, size);
         }
         return font;

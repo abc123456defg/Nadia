@@ -1,6 +1,7 @@
 package cn.harper.core.font.utils;
 
 
+import cn.harper.utils.Info;
 import cn.harper.utils.color.ColorUtils;
 import cn.harper.utils.render.RenderUtil;
 import net.minecraft.client.Minecraft;
@@ -64,11 +65,16 @@ public class FontUtils {
 
         try {
             InputStream ex = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation("nadia/font/" + fontName)).getInputStream();
+            long stime = System.currentTimeMillis();
             font = Font.createFont(0, ex);
+            long etime = System.currentTimeMillis();
+            Info.getLogger().info("[FontManager]: " + fontName + " Font Created " + (etime - stime) + "ms");
             font = font.deriveFont(fontType, size);
+
+
         } catch (Exception var3) {
             var3.printStackTrace();
-            System.err.println("Failed to load custom font");
+            Info.getLogger().info("[FontManager]: Failed to load custom font");
         }
 
         return font;
